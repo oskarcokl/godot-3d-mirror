@@ -10,6 +10,9 @@ func _ready():
 
 
 func _process(_delta):
+    pass
+
+func show_mirror_normals():
     var vertices = mirror_mesh.mesh.get_faces()
 
     var mdt = MeshDataTool.new()
