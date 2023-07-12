@@ -107,7 +107,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_1b3s5")
 
 [node name="Player" parent="." instance=ExtResource("1_ylcjx")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 1, 0)
+transform = Transform3D(0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, 0, 1, 0)
 jump_height = 4.0
 jump_time = 0.3
 gravity = 250.0
@@ -128,10 +128,11 @@ light_bake_mode = 0
 shadow_enabled = true
 
 [node name="Mirror" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -5, 1.5, 0)
+rotation_edit_mode = 1
 script = ExtResource("3_3whso")
 
 [node name="MirrorMesh" type="MeshInstance3D" parent="Mirror"]
-transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, -5, 1.5, 0)
 mesh = SubResource("PlaneMesh_xedhe")
 
 [node name="SubViewport" type="SubViewport" parent="Mirror/MirrorMesh"]
@@ -140,7 +141,8 @@ size = Vector2i(1280, 720)
 [node name="Camera3D" type="Camera3D" parent="Mirror/MirrorMesh/SubViewport"]
 editor_description = "Camera for the mirror effect
 "
-transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -7, 2, -1)
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, -7, 1, -1)
 
 [node name="Debug" type="MeshInstance3D" parent="Mirror/MirrorMesh/SubViewport/Camera3D"]
+visible = false
 mesh = SubResource("CapsuleMesh_1d8iq")
