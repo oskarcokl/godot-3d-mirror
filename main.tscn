@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://dh36o4qefcnmc"]
+
+[ext_resource type="PackedScene" uid="uid://gwhcbmiu0gu1" path="res://player.tscn" id="1_ylcjx"]
+[ext_resource type="Shader" path="res://mirror.gdshader" id="2_51yo8"]
+[ext_resource type="Script" path="res://mirror.gd" id="3_3whso"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjdif"]
+albedo_color = Color(0.964706, 0.466667, 0.458824, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nbpeh"]
+material = SubResource("StandardMaterial3D_fjdif")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1b3s5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf3rm"]
+albedo_color = Color(0.560784, 1, 0.403922, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eg00s"]
+material = SubResource("StandardMaterial3D_gf3rm")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dddoe"]
+size = Vector3(10, 0.001, 10)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hkwi5"]
+viewport_path = NodePath("Mirror/MirrorMesh/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylud3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_51yo8")
+shader_parameter/reflection_texture = SubResource("ViewportTexture_hkwi5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xedhe"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_ylud3")
+size = Vector2(5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxxlp"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1d8iq"]
+material = SubResource("StandardMaterial3D_lxxlp")
+
+[node name="Main" type="Node3D"]
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="Box1" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0.5, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box1"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box1"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Box2" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.5, 1.7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box2"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box2"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Box3" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 0.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box3"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box3"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Box4" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.5, -1.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box4"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box4"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Box5" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 1.5, -2.2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box5"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box5"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Box6" type="StaticBody3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0.5, -2.2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boxes/Box6"]
+mesh = SubResource("BoxMesh_nbpeh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Box6"]
+shape = SubResource("BoxShape3D_1b3s5")
+
+[node name="Player" parent="." instance=ExtResource("1_ylcjx")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 1, 0)
+jump_height = 4.0
+jump_time = 0.3
+gravity = 250.0
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_eg00s")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_dddoe")
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1.47027e-07, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, -1.03964e-07, 1.03964e-07, 17, 23, 30)
+light_color = Color(1, 1, 0.796078, 1)
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="Mirror" type="Node3D" parent="."]
+script = ExtResource("3_3whso")
+
+[node name="MirrorMesh" type="MeshInstance3D" parent="Mirror"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, -4.37114e-08, -5, 1.5, 0)
+mesh = SubResource("PlaneMesh_xedhe")
+
+[node name="SubViewport" type="SubViewport" parent="Mirror/MirrorMesh"]
+size = Vector2i(1280, 720)
+
+[node name="Camera3D" type="Camera3D" parent="Mirror/MirrorMesh/SubViewport"]
+editor_description = "Camera for the mirror effect
+"
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -7, 2, -1)
+
+[node name="Debug" type="MeshInstance3D" parent="Mirror/MirrorMesh/SubViewport/Camera3D"]
+mesh = SubResource("CapsuleMesh_1d8iq")
